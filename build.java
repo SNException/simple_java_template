@@ -31,32 +31,6 @@ public final class build {
         return process.exitValue() == 0;
     }
 
-    private static String[] getAllFiles(final String dir, final String prefix) {
-        try (final Stream<Path> stream = Files.walk(Path.of(dir), Integer.MAX_VALUE)) {
-            final ArrayList<String> files = new ArrayList<>(stream.map(String::valueOf).sorted().collect(Collectors.toList()));
-            final ArrayList<String> result = new ArrayList<>(files.size());
-
-            for (int i = 0, l = files.size(); i < l; ++i) {
-                final String file = files.get(i);
-
-                if (Files.isDirectory(Path.of(file))) {
-                    continue;
-                }
-
-                if (prefix != null) {
-                    if (!file.endsWith(prefix)) {
-                        continue;
-                    }
-                }
-
-                result.add(file);
-            }
-            return result.toArray(String[]::new);
-        } catch (final IOException ex) {
-            return null;
-        }
-    }
-
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     private @interface Invokeable {}
@@ -99,23 +73,14 @@ public final class build {
 
     @Invokeable
     public static void build() {
-        final String[] sources = getAllFiles(buildOptions.srcDir, ".java");
-        if (sources == null) {
-            System.out.println("Failed to find all source files for the compiling step!");
-            System.exit(1);
-        }
+        new File(buildOptions.srcFiles).deleteOnExit();
 
-        try (final FileOutputStream out = new FileOutputStream(buildOptions.srcFiles, /* append */ true)) {
-            for (final String source : sources) {
-                out.write((source + "\n").getBytes());
-            }
-            out.flush();
-            new File(buildOptions.srcFiles).deleteOnExit();
+        try {
+            Files.writeString(Path.of(buildOptions.srcFiles), Path.of(buildOptions.srcDir, "Main.java").toAbsolutePath().toString());
         } catch (final IOException ex) {
             System.out.println("Failed to write sources file!");
             System.exit(1);
         }
-
 
         // the directory will be recreated for us when we invoke the compiler with '-d'.
         if (Files.exists(Path.of(buildOptions.outDir))) {
