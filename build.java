@@ -112,7 +112,7 @@ public final class build {
 
         if (args.length == 0) {
             System.out.println("Please specify the function you wish to run!");
-            System.out.println("Example: java.exe ./build.java --build");
+            System.out.println("Example: java.exe ./build.java --foobar");
             System.exit(1);
         }
 
