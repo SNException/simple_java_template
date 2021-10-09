@@ -75,13 +75,14 @@ public final class build {
         new File(buildOptions.srcFiles).deleteOnExit();
 
         try {
+            // @NOTE add source files
             Files.writeString(Path.of(buildOptions.srcFiles), Path.of(buildOptions.srcDir, "Main.java").toAbsolutePath().toString());
         } catch (final IOException ex) {
             System.out.println("Failed to write sources file!");
             System.exit(1);
         }
 
-        // the directory will be recreated for us when we invoke the compiler with '-d'.
+        // @NOTE the directory will be recreated for us when we invoke the compiler with '-d'.
         if (Files.exists(Path.of(buildOptions.outDir))) {
             final boolean success = clean();
             if (!success) {
