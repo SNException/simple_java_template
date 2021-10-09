@@ -157,7 +157,7 @@ public final class build {
             final String targetMethod = args[0].replace("--", "");
 
             for (final Method method : build.class.getDeclaredMethods()) {
-                if (Modifier.isPublic(method.getModifiers()) && method.getName().equals(targetMethod) && method.getAnnotation(Invokeable.class) != null) {
+                if (Modifier.isPublic(method.getModifiers()) && method.getName().equals(targetMethod) && method.getAnnotation(Invokeable.class) != null && method.getParameterCount() == 0) {
                     try {
                         method.invoke(null);
                         System.exit(0);
@@ -168,7 +168,10 @@ public final class build {
                 }
             }
             System.out.printf("Failed to find the specified function '%s'.\n", targetMethod);
-            System.out.println("Make sure the function you wish to execute is 'public' and is annotated with @Invokeable.");
+            System.out.println("Make sure the function you wish to execute meets the following requirements:");
+            System.out.println("\t- The visibility is public");
+            System.out.println("\t- It is annotated with @Invokeable");
+            System.out.println("\t- Does not take any arguments");
             System.exit(1);
         } else {
             System.out.println("Too many arguments!");
