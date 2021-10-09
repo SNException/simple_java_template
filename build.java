@@ -8,6 +8,8 @@ import java.util.stream.*;
 
 public final class build {
 
+    private build() { assert false; }
+
     private static boolean runShellCommand(final String cwd, final Consumer<String> callback, final String...cmdLine) {
         Process process = null;
         try {
