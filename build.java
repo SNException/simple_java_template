@@ -42,8 +42,7 @@ public final class build {
         public String outDir         = "bin";
         public String srcFiles       = "sources.txt";
         public String compiler       = new File(System.getProperty("java.home") + File.separator + "bin" + File.separator + "javac.exe").getAbsolutePath();
-        public String release        = "17";
-        public String[] compilerLine = new String[] {compiler, "-J-Xms2048m", "-J-Xmx2048m", "-J-XX:+UseG1GC", "-Xdiags:verbose", "-Xlint:all", "-Xmaxerrs", "5", "-encoding", "UTF8", "--release", release, "-g", "-d", outDir, "-sourcepath", srcDir, "@" + srcFiles};
+        public String[] compilerLine = new String[] {compiler, "-J-Xms2048m", "-J-Xmx2048m", "-J-XX:+UseG1GC", "-Xdiags:verbose", "-Xlint:all", "-Xmaxerrs", "5", "-encoding", "UTF8", "--release", "17", "-g", "-d", outDir, "-sourcepath", srcDir, "@" + srcFiles};
 
         public String jvmExe     = new File(System.getProperty("java.home") + File.separator + "bin" + File.separator + "java.exe").getAbsolutePath();
         public String entryClass = "Main";
