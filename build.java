@@ -78,9 +78,11 @@ public final class build {
 
         try {
             // @NOTE add source files
-            Files.writeString(Path.of(buildOptions.srcFiles), Path.of(buildOptions.srcDir, "Main.java").toAbsolutePath().toString());
+            Files.writeString(Path.of(buildOptions.srcFiles), Path.of(buildOptions.srcDir, "Main.java").toAbsolutePath().toString() + "\n", StandardOpenOption.CREATE, StandardOpenOption.APPEND, StandardOpenOption.SYNC);
+            Files.writeString(Path.of(buildOptions.srcFiles), Path.of(buildOptions.srcDir, "Lambdas.java").toAbsolutePath().toString() + "\n", StandardOpenOption.CREATE, StandardOpenOption.APPEND, StandardOpenOption.SYNC);
         } catch (final IOException ex) {
             System.out.println("Failed to write sources file!");
+            ex.printStackTrace(System.err);
             System.exit(1);
         }
 
