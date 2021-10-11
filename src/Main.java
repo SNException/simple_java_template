@@ -1,11 +1,15 @@
 import java.io.*;
 import java.lang.management.*;
+import java.util.*;
 import java.util.logging.*;
 
 public final class Main {
 
     public static boolean isDebugMode() {
-        return ManagementFactory.getRuntimeMXBean().getInputArguments().contains("-ea");
+        return ManagementFactory
+                        .getRuntimeMXBean()
+                        .getInputArguments()
+                        .contains("-ea");
     }
 
     public static final Logger logger = allocateLogger();
@@ -16,6 +20,18 @@ public final class Main {
         final boolean isDebug = isDebugMode();
         logger.setLevel(isDebug ? Level.ALL : Level.SEVERE);
         final ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new SimpleFormatter() {
+            @Override
+            public synchronized String format(final LogRecord log) {
+                return String.format("[%s][%s][%s#%s]: %s\n",
+                                    new Date(log.getMillis()),
+                                    log.getLevel().getLocalizedName(),
+                                    log.getSourceClassName(),
+                                    log.getSourceMethodName(),
+                                    log.getMessage()
+                );
+            }
+        });
         consoleHandler.setLevel(isDebug ? Level.ALL : Level.SEVERE);
         logger.addHandler(consoleHandler);
 
@@ -23,8 +39,9 @@ public final class Main {
     }
 
     private static void initUncaughtExceptionHandler() {
-        // @NOTE We only want to apply this exception handler in dev mode so we do not waste CPU time checking
-        // whether the exception is an instance of AssertionError, which can not happen anyway.
+        // @NOTE We only want to apply this exception handler in dev mode so
+        // we do not waste CPU time checking whether the exception is an
+        // instance of AssertionError, which can not happen anyway.
         if (isDebugMode()) {
             Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
                 if (e instanceof AssertionError) {
@@ -33,14 +50,18 @@ public final class Main {
                     e.printStackTrace(System.err);
 
                     // @NOTE Kill the JVM immediately.
-                    // I have no clue why this is not the default behaviour when triggering assert statements.
+                    // I have no clue why this is not the default behaviour
+                    // when triggering assert statements.
                     // That just makes them almost completely pointless.
                     Runtime.getRuntime().halt(-1);
                 }
 
-                // @NOTE fallthrough to the default behaviour (found here: ThreadGroup#uncaughtException)
+                // @NOTE fallthrough to the default behaviour
+                // (found here: ThreadGroup#uncaughtException)
                 if (!(e instanceof ThreadDeath)) {
-                    System.err.print("Exception in thread \"" + t.getName() + "\" ");
+                    System.err.print(
+                        "Exception in thread \"" + t.getName() + "\" "
+                    );
                     e.printStackTrace(System.err);
                 }
             });

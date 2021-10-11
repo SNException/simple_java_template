@@ -30,56 +30,83 @@ public final class Lambdas {
 
     @FunctionalInterface
     public interface Nullary<Result> {
+
         public Result call();
     }
 
     @FunctionalInterface
     public interface Unary<Result, Param1> {
-        public Result call(final Param1 p1);
+
+         public Result call(final Param1 p1);
     }
 
     @FunctionalInterface
     public interface Binary<Result, Param1, Param2> {
+
         public Result call(final Param1 p1, final Param2 p2);
     }
 
     @FunctionalInterface
     public interface Ternary<Result, Param1, Param2, Param3> {
+
         public Result call(final Param1 p1, final Param2 p2, final Param3 p3);
     }
 
     @FunctionalInterface
     public interface Quaternary<Result, Param1, Param2, Param3, Param4> {
-        public Result call(final Param1 p1, final Param2 p2, final Param3 p3, final Param4 p4);
+        public Result call(final Param1 p1, final Param2 p2, final Param3 p3,
+                           final Param4 p4);
     }
 
     @FunctionalInterface
     public interface Quinary<Result, Param1, Param2, Param3, Param4, Param5> {
-        public Result call(final Param1 p1, final Param2 p2, final Param3 p3, final Param4 p4, final Param5 p5);
+
+        public Result call(final Param1 p1, final Param2 p2, final Param3 p3,
+                           final Param4 p4, final Param5 p5);
     }
 
     @FunctionalInterface
-    public interface Senary<Result, Param1, Param2, Param3, Param4, Param5, Param6> {
-        public Result call(final Param1 p1, final Param2 p2, final Param3 p3, final Param4 p4, final Param5 p5, final Param6 p6);
+    public interface Senary<Result, Param1, Param2, Param3, Param4, Param5,
+                            Param6> {
+
+        public Result call(final Param1 p1, final Param2 p2, final Param3 p3,
+                           final Param4 p4, final Param5 p5, final Param6 p6);
     }
 
     @FunctionalInterface
-    public interface Septenary<Result, Param1, Param2, Param3, Param4, Param5, Param6, Param7> {
-        public Result call(final Param1 p1, final Param2 p2, final Param3 p3, final Param4 p4, final Param5 p5, final Param6 p6, final Param7 p7);
+    public interface Septenary<Result, Param1, Param2, Param3, Param4, Param5,
+                               Param6, Param7> {
+
+        public Result call(final Param1 p1, final Param2 p2, final Param3 p3,
+                           final Param4 p4, final Param5 p5, final Param6 p6,
+                           final Param7 p7);
     }
 
     @FunctionalInterface
-    public interface Octonary<Result, Param1, Param2, Param3, Param4, Param5, Param6, Param7, Param8> {
-        public Result call(final Param1 p1, final Param2 p2, final Param3 p3, final Param4 p4, final Param5 p5, final Param6 p6, final Param7 p7, final Param8 p8);
+    public interface Octonary<Result, Param1, Param2, Param3, Param4, Param5,
+                              Param6, Param7, Param8> {
+
+        public Result call(final Param1 p1, final Param2 p2, final Param3 p3,
+                           final Param4 p4, final Param5 p5, final Param6 p6,
+                           final Param7 p7, final Param8 p8);
     }
 
     @FunctionalInterface
-    public interface Novenary<Result, Param1, Param2, Param3, Param4, Param5, Param6, Param7, Param8, Param9> {
-        public Result call(final Param1 p1, final Param2 p2, final Param3 p3, final Param4 p4, final Param5 p5, final Param6 p6, final Param7 p7, final Param8 p8, final Param9 p9);
+    public interface Novenary<Result, Param1, Param2, Param3, Param4, Param5,
+                              Param6, Param7, Param8, Param9> {
+
+        public Result call(final Param1 p1, final Param2 p2, final Param3 p3,
+                           final Param4 p4, final Param5 p5, final Param6 p6,
+                           final Param7 p7, final Param8 p8, final Param9 p9);
     }
 
     @FunctionalInterface
-    public interface Denary<Result, Param1, Param2, Param3, Param4, Param5, Param6, Param7, Param8, Param9, Param10> {
-        public Result call(final Param1 p1, final Param2 p2, final Param3 p3, final Param4 p4, final Param5 p5, final Param6 p6, final Param7 p7, final Param8 p8, final Param9 p9, final Param10 p10);
+    public interface Denary<Result, Param1, Param2, Param3, Param4, Param5,
+                            Param6, Param7, Param8, Param9, Param10> {
+
+        public Result call(final Param1 p1, final Param2 p2, final Param3 p3,
+                           final Param4 p4, final Param5 p5, final Param6 p6,
+                           final Param7 p7, final Param8 p8, final Param9 p9,
+                           final Param10 p10);
     }
 }
