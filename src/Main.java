@@ -1,5 +1,6 @@
 import java.io.*;
 import java.lang.management.*;
+import java.text.*;
 import java.util.*;
 import java.util.logging.*;
 
@@ -24,7 +25,7 @@ public final class Main {
             @Override
             public synchronized String format(final LogRecord log) {
                 return String.format("[%s][%s][%s#%s]: %s\n",
-                                    new Date(log.getMillis()),
+                                    new SimpleDateFormat("dd.MM.YYYY HH:mm:ss:SSS").format(new Date(log.getMillis())),
                                     log.getLevel().getLocalizedName(),
                                     log.getSourceClassName(),
                                     log.getSourceMethodName(),
